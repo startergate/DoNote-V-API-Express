@@ -1,7 +1,7 @@
 {
   "name": "donotev-api",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -10,5 +10,9 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/startergate/DoNoteV-API.git",
+  "author": "STARTERGATE <32726809+startergate@users.noreply.github.com>",
+  "license": "MIT"
 }

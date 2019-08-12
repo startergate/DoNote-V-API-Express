@@ -2,15 +2,39 @@ const express = require('express');
 const router = express.Router();
 
 /* GET home page. */
-router.get('/:userid/note', (req, res, next) => { 
+router.get('/:sessid/category', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/:userid/note/:id', (req, res, next) => {
+router.post('/:sessid/category', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/:userid/note/:id/exist', (req, res, next) => {
+router.get('/:sessid/category/:id', (req, res, next) => {
+    res.render('index', { title: 'Express' });
+});
+
+router.get('/:sessid/note', (req, res, next) => {
+    res.render('index', { title: 'Express' });
+});
+
+router.post('/:sessid/note', (req, res, next) => {
+    res.render('index', { title: 'Express' });
+});
+
+router.get('/:sessid/note/shared', (req, res, next) => {
+    res.render('index', { title: 'Express' });
+});
+
+router.get('/:sessid/note/:id', (req, res, next) => {
+    res.render('index', { title: 'Express' });
+});
+
+router.put('/:sessid/note/:id', (req, res, next) => {
+    res.render('index', { title: 'Express' });
+});
+
+router.get('/:sessid/note/:id/exist', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 

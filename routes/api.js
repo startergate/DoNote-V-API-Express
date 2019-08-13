@@ -35,7 +35,8 @@ router.put('/:sessid/note/:id', (req, res, next) => {
 });
 
 router.get('/:sessid/note/:id/exist', (req, res, next) => {
-    res.render('index', { title: 'Express' });
+
+    res.send();
 });
 
 module.exports = router;

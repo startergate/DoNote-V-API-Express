@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const controller = require('./api.controller');
 
 /* GET home page. */
 router.get('/:sessid/category', (req, res, next) => {
@@ -34,9 +35,6 @@ router.put('/:sessid/note/:id', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/:sessid/note/:id/exist', (req, res, next) => {
-
-    res.send();
-});
+router.get('/:sessid/note/:id/exist', controller.checkExistNote);
 
 module.exports = router;

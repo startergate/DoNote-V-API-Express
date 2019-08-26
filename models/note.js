@@ -1,4 +1,11 @@
-const Sequelize = require('Sequelize');
+const Sequelize = require('sequelize');
+
+const dbSetting = require('../modules/dbInfo');
+
+const sequelize = new Sequelize('donote_beta', dbSetting.id, dbSetting.pw, {
+    host: dbSetting.host,
+    dialect: "mysql"
+});
 
 class Note extends Sequelize.Model { }
 
@@ -11,7 +18,7 @@ Note.init({
         type: Sequelize.STRING
     },
     edittime: {
-        type: Sequelize.TIME
+        type: Sequelize.TIME,
         allowNull: false
     },
     id: {
@@ -24,4 +31,7 @@ Note.init({
     category: {
         type: Sequelize.STRING(32)
     }
+}, {
+    sequelize,
+    modelName: 'note'
 });

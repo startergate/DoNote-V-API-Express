@@ -1,6 +1,16 @@
-const dbUser = require('/modules/dbInfo');
+const dbUser = require('modules/dbInfo');
 const sid = require('@startergate/sidjs');
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
+
+const dbSetting = require('modules/dbInfo');
+
+
+const sequelize = new Sequelize('donote_beta', dbSetting.id, dbSetting.pw, {
+    host: dbSetting.host,
+    dialect: "mysql"
+});
+
+const Note = sequelize.import("note", + require('models/note'));
 
 exports.checkExistNote = (req, res, next) => {
     sid.loginAuth(req.headers.sid_clientid, req.params.sessid).then(info => {
@@ -14,11 +24,16 @@ exports.checkExistNote = (req, res, next) => {
             });
             return;
         }
+        Note.
+        Note.findByPk(req.params.id).then(note => {
+            res.send(note);
+        }).catch(err => {
+            console.error(err);
+            res.sendStatus(500);
+        });
+        console.log(info);
     }).catch(err => {
         console.log(err);
         res.sendStatus(500);
     });
-
-    req.sessid
-    res.send();
 };

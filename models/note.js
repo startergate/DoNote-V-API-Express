@@ -1,16 +1,7 @@
 const Sequelize = require('sequelize');
 
-const dbSetting = require('modules/dbInfo');
-
-const sequelize = new Sequelize('donote_beta', dbSetting.id, dbSetting.pw, {
-    host: dbSetting.host,
-    dialect: "mysql"
-});
-
-module.exports = (sequelize: Sequelize.Sequelize, DataTypes) => {
-    class Note extends Sequelize.Model { }
-
-    Note.init({
+module.exports = (sequelize, DataTypes) => {
+    return sequelize.define('Note', {
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -34,9 +25,6 @@ module.exports = (sequelize: Sequelize.Sequelize, DataTypes) => {
             type: DataTypes.STRING(32)
         }
     }, {
-        sequelize,
-        modelName: 'note'
+        timestamps: false
     });
-
-    return Note;
 };

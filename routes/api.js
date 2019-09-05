@@ -27,14 +27,14 @@ router.get('/:sessid/note/shared', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/:sessid/note/:id', (req, res, next) => {
-    res.render('index', { title: 'Express' });
-});
+router.get('/:sessid/note/:id', controller.findNote);
 
 router.put('/:sessid/note/:id', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/:sessid/note/:id/exist', controller.checkExistNote);
+// router.get('/:sessid/note/:name/check', controller.checkExistName);
+
+// router.get('/:sessid/note/:id/exist', controller.checkExistNote);
 
 module.exports = router;

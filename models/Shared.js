@@ -20,16 +20,16 @@ exports.SharedMetaIndex = (sequelize, DataTypes) => {
 exports.SharedMetaData = (sequelize, DataTypes) => {
   return sequelize.define("SharedMetaData", {
     shareTable: {
-      type: Sequelize.STRING(65),
+      type: DataTypes.STRING(65),
       allowNull: false
     },
     shareID: {
-      type: Sequelize.STRING(32),
+      type: DataTypes.STRING(32),
       allowNull: false,
       unique: 'compositeIndex'
     },
     shareEdit: {
-      type: Sequelize.INTEGER(1)
+      type: DataTypes.NUMBER(1)
     }
   }, {
     timestamps: false

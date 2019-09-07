@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  sequelize.define('User', {
+  return sequelize.define('User', {
     pid: {
       type: DataTypes.CHAR(32),
       allowNull: false,
@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(64),
       unique: "compositeIndex"
     }
-  }, {
-    sequelize,
-    modelName: "user"
   }, {
     timestamps: false
   });

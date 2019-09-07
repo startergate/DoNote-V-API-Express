@@ -1,11 +1,11 @@
 exports.MetaIndex = (sequelize, DataTypes) => {
-  sequelize.define({
+  return sequelize.define("MetaIndex", {
     metaid: {
-      type: Sequelize.CHAR(32),
+      type: DataTypes.CHAR(32),
       allowNull: false
     },
     userid: {
-      type: Sequelize.CHAR(32),
+      type: DataTypes.CHAR(32),
       allowNull: false
     }
   }, {
@@ -13,20 +13,21 @@ exports.MetaIndex = (sequelize, DataTypes) => {
   });
 };
 
-MetaData.init({
-  datatype: {
-    type: Sequelize.STRING(8),
-    allowNull: false
-  },
-  metadata: {
-    type: Sequelize.STRING(100),
-    allowNull: false
-  },
-  metaid: {
-    type: Sequelize.CHAR(32),
-    allowNull: false
-  }
-}, {
-  sequelize,
-  modelName: 'metaData'
-});
+exports.MetaData = (sequelize, DataTypes) => {
+  return sequelize.define("MetaData", {
+    datatype: {
+      type: DataTypes.STRING(8),
+      allowNull: false
+    },
+    metadata: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    metaid: {
+      type: DataTypes.CHAR(32),
+      allowNull: false
+    }
+  }, {
+    timestamps: false
+  });
+};

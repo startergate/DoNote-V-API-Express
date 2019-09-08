@@ -1,13 +1,5 @@
 const dbUser = require('modules/dbInfo');
 const sid = require('@startergate/sidjs');
-const Sequelize = require('sequelize');
-
-const dbSetting = require('modules/dbInfo');
-
-const sequelize = new Sequelize('donote_beta', dbSetting.id, dbSetting.pw, {
-    host: dbSetting.host,
-    dialect: "mysql"
-});
 
 const note = require('models').note;
 

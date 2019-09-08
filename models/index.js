@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const MetaData = require('./Meta').MetaData;
-const MetaIndex = require('./Meta').MetaIndex
+const MetaIndex = require('./Meta').MetaIndex;
 const Note = require('./Note');
 const SharedMetaData = require('./Shared').SharedMetaData;
 const SharedMetaIndex = require('./Shared').SharedMetaIndex;

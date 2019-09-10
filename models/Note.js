@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         align: {
             type: DataTypes.NUMBER(11),
-            unique: "compositeIndex"
+            unique: "compositeIndex",
+            autoIncrement: true
         },
         category: {
             type: DataTypes.STRING(32)

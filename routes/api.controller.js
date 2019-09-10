@@ -2,6 +2,7 @@ const sid = require('@startergate/sidjs');
 
 const note = require('models').note;
 const metadata = require('models').metadata;
+const sharedmetadata = require('models').sharedmetadata;
 
 exports.sidAuthMiddleware = (req, res, next) => {
     sid.loginAuth(req.headers.sid_clientid, req.headers.sid_sessid).then(info => {
@@ -97,7 +98,7 @@ exports.findCategorizedNote = (req, res, next) => {
 };
 
 exports.findCategory = (req, res, next) => {
-    metadata.findAll({ where: { datatype: "CATEGORY" },attributes: [ 'metadata', 'metaid' ] })
+    metadata.findAll({ where: { datatype: "CATEGORY" }, attributes: [ 'metadata', 'metaid' ] })
       .then(categories => {
           res.send({
               type: 'data',
@@ -109,4 +110,8 @@ exports.findCategory = (req, res, next) => {
         console.error(err);
           res.sendStatus(520);
     });
+};
+
+exports.findSharedNote = (req, res, next) => {
+    sharedmetadata.findAll( )
 };

@@ -5,12 +5,12 @@ const note = require('models').note;
 
 exports.findNote = (req, res, next) => {
     sid.loginAuth(req.headers.sid_clientid, req.params.sessid).then(info => {
-        if ((info.is_vaild && info.is_succeed)) {
+        if ((info.is_valid && info.is_succeed)) {
             res.status(500);
             res.send({
                 type: 'error',
 
-                is_vaild: true,
+                is_valid: true,
                 is_succeed: false
             });
             return;
@@ -35,7 +35,7 @@ exports.updateNote =  (req, res, next) => {
             res.send({
                 type: 'error',
 
-                is_vaild: true,
+                is_valid: true,
                 is_succeed: false
             });
             return;

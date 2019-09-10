@@ -1,5 +1,5 @@
 exports.SharedMetaIndex = (sequelize, DataTypes) => {
-  return sequelize.define("SharedMetaData", {
+  return sequelize.define("SharedMetaIndex", {
     note: {
       type: DataTypes.STRING(65),
       allowNull: false
@@ -7,7 +7,8 @@ exports.SharedMetaIndex = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.STRING(32),
       allowNull: false,
-      unique: 'compositeIndex'
+      unique: 'compositeIndex',
+      primaryKey: true
     },
     isEditable: {
       type: DataTypes.NUMBER(1)

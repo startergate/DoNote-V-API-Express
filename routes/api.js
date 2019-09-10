@@ -29,9 +29,7 @@ router.get('/:sessid/note/shared', (req, res, next) => {
 
 router.get('/:sessid/note/:id', controller.findNote);
 
-router.put('/:sessid/note/:id', (req, res, next) => {
-    res.render('index', { title: 'Express' });
-});
+router.put('/:sessid/note/:id', controller.updateNote);
 
 // router.get('/:sessid/note/:name/check', controller.checkExistName);
 

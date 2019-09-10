@@ -16,7 +16,7 @@ exports.findNote = (req, res, next) => {
             return;
         }
         note.tableName = `notedb_${info.pid}`;
-        note.findByPk(req.params.id).then(note => {
+        note.findByPk(req.params.id, {attributes: ['name', 'text', 'edittime', 'id', 'category']}).then(note => {
             res.send({
                 type: 'data',
 

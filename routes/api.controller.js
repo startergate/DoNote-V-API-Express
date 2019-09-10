@@ -78,5 +78,14 @@ exports.findAllNote = (req, res, next) => {
         res.sendStatus(202);
     })
 };
+
+exports.findCategorizedNote = (req, res, next) => {
+    note.findAll({ where: { category: req.params.id }, attributes: ['name', 'id', 'category'] }).then(notes => {
+        res.send({
+            type: 'data',
+
+            is_valid: true,
+            data: notes
+        });
     })
 };

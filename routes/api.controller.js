@@ -46,11 +46,23 @@ exports.updateNote =  (req, res, next) => {
             return;
         }
         note.tableName = `notedb_${info.pid}`;
-        note.update({
+        let updateQuery;
+        if (req.body.name || req.body.text) updateQuery = {
             name: req.body.name,
             text: req.body.text,
-            edittime: new Date(Date.now()).toISOString()
-        }, {
+            edittime: new Date(Date.now()).toISOString().replace('T', ' ').split('Z').join('')
+        };
+        else {
+            res.send({
+                type: 'error',
+
+                is_valid: true,
+                is_succeed: true,
+                is_modified: false
+            });
+        }
+        console.log(req.body);
+        note.update(updateQuery, {
             where: {id: req.params.id},
             returning: true
         }).then(note => {
@@ -59,7 +71,7 @@ exports.updateNote =  (req, res, next) => {
 
                 is_valid: true,
                 is_succeed: true,
-                data: note
+                is_modified: true
             });
         })
     })

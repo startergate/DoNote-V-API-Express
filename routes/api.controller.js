@@ -53,6 +53,14 @@ exports.updateNote =  (req, res, next) => {
         }, {
             where: {id: req.params.id},
             returning: true
+        }).then(note => {
+            res.send({
+                type: 'data',
+
+                is_valid: true,
+                is_succeed: true,
+                data: note
+            });
         })
     })
 };

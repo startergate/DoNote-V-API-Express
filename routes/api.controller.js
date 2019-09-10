@@ -1,4 +1,3 @@
-const dbUser = require('modules/dbInfo');
 const sid = require('@startergate/sidjs');
 
 const note = require('models').note;
@@ -18,7 +17,7 @@ exports.sidAuthMiddleware = (req, res, next) => {
         note.tableName = `notedb_${info.pid}`;
         next();
     }).catch(err => {
-        console.log(err);
+        console.error(err);
         res.sendStatus(500);
     });
 };
@@ -63,7 +62,10 @@ exports.updateNote = (req, res, next) => {
             is_succeed: true,
             is_modified: true
         });
-    });
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+    })
 };
 
 exports.findAllNote = (req, res, next) => {
@@ -76,7 +78,7 @@ exports.findAllNote = (req, res, next) => {
         });
     }).catch(err => {
         res.sendStatus(202);
-    })
+    });
 };
 
 exports.findCategorizedNote = (req, res, next) => {
@@ -87,5 +89,8 @@ exports.findCategorizedNote = (req, res, next) => {
             is_valid: true,
             data: notes
         });
-    })
+    }).catch(err => {
+        res.sendStatus(202);
+    });
+};
 };

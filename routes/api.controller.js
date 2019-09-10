@@ -17,7 +17,12 @@ exports.findNote = (req, res, next) => {
         }
         note.tableName = `notedb_${info.pid}`;
         note.findByPk(req.params.id).then(note => {
-            res.send(note);
+            res.send({
+                type: 'data',
+
+                is_valid: true,
+                data: note
+            });
         }).catch(err => {
             console.error(err);
             res.sendStatus(500);

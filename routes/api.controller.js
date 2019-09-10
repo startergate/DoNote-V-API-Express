@@ -65,5 +65,18 @@ exports.updateNote = (req, res, next) => {
         });
     });
 };
+
+exports.findAllNote = (req, res, next) => {
+    note.findAll({ attributes: ['name', 'id', 'category'] }).then(notes => {
+        res.send({
+            type: 'data',
+
+            is_valid: true,
+            data: notes
+        });
+    }).catch(err => {
+        res.sendStatus(202);
+    })
+};
     })
 };

@@ -1,6 +1,7 @@
 const sid = require('@startergate/sidjs');
 
 const note = require('models').note;
+const metadata = require('models').metadata;
 
 exports.sidAuthMiddleware = (req, res, next) => {
     sid.loginAuth(req.headers.sid_clientid, req.headers.sid_sessid).then(info => {
@@ -15,6 +16,7 @@ exports.sidAuthMiddleware = (req, res, next) => {
             return;
         }
         note.tableName = `notedb_${info.pid}`;
+        metadata.tableName = `metadb_${info.pid}`;
         next();
     }).catch(err => {
         console.error(err);
@@ -93,4 +95,18 @@ exports.findCategorizedNote = (req, res, next) => {
         res.sendStatus(202);
     });
 };
+
+exports.findCategory = (req, res, next) => {
+    metadata.findAll({ where: { datatype: "CATEGORY" },attributes: [ 'metadata', 'metaid' ] })
+      .then(categories => {
+          res.send({
+              type: 'data',
+
+              is_valid: true,
+              data: categories
+          });
+      }).catch(err => {
+        console.error(err);
+          res.sendStatus(520);
+    });
 };

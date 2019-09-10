@@ -4,9 +4,7 @@ const controller = require('./api.controller');
 
 router.use(controller.sidAuthMiddleware);
 
-router.get('/category', (req, res, next) => {
-    res.render('index', { title: 'Express' });
-});
+router.get('/category', controller.findCategory);
 
 router.post('/category', (req, res, next) => {
     // TODO: notedb category하고 metadb metaid 자료형 맞추기

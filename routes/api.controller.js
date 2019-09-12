@@ -127,5 +127,11 @@ exports.findSharedNote = (req, res, next) => {
           }, err => {})
         })
       }
+      res.send({
+        type: "data",
+
+        is_valid: true,
+        data: output
+      });
     })
 };

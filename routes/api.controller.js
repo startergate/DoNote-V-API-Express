@@ -118,6 +118,13 @@ exports.findSharedNote = (req, res, next) => {
     let output = [];
     sharedmetadata.findAll().then(async smd => {
       for (let data in smd) {
+        let notedata = data.shareTable.split('_');
+        note.tableName = `notedb_${notedata[0]}`;
+        if (note.tableName === currentNoteDBName) continue;
+        await note.findByPk(notedata[1], { attributes: ['name'] }).then(note => {
+          return new Promise(_ => {
+            output.push({ shareID: data.shareID, isEditable: !!+data.shareEdit, name: note.name });
+          }, err => {})
         })
       }
     })

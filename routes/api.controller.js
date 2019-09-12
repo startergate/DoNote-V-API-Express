@@ -18,6 +18,7 @@ exports.sidAuthMiddleware = (req, res, next) => {
         }
         note.tableName = `notedb_${info.pid}`;
         metadata.tableName = `metadb_${info.pid}`;
+        sharedmetadata.tableName = `sharedb_${info.pid}`;
         next();
     }).catch(err => {
         console.error(err);
@@ -113,5 +114,11 @@ exports.findCategory = (req, res, next) => {
 };
 
 exports.findSharedNote = (req, res, next) => {
-    sharedmetadata.findAll( )
+    let currentNoteDBName = note.tableName;
+    let output = [];
+    sharedmetadata.findAll().then(async smd => {
+      for (let data in smd) {
+        })
+      }
+    })
 };

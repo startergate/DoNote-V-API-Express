@@ -108,7 +108,7 @@ exports.findCategory = (req, res, next) => {
               data: categories
           });
       }).catch(err => {
-        console.error(err);
+          console.error(err);
           res.sendStatus(520);
     });
 };
@@ -118,13 +118,15 @@ exports.findSharedNote = (req, res, next) => {
     let output = [];
     sharedmetadata.findAll().then(async smd => {
       for (let data in smd) {
-        let notedata = data.shareTable.split('_');
-        note.tableName = `notedb_${notedata[0]}`;
+        let noteData = data.shareTable.split('_');
+        note.tableName = `notedb_${noteData[0]}`;
         if (note.tableName === currentNoteDBName) continue;
-        await note.findByPk(notedata[1], { attributes: ['name'] }).then(note => {
+        await note.findByPk(noteData[1], { attributes: ['name'] }).then(note => {
           return new Promise(_ => {
             output.push({ shareID: data.shareID, isEditable: !!+data.shareEdit, name: note.name });
-          }, err => {})
+          }, err => console.error(err));
+        }).catch(err => {
+          // return new Promise()
         })
       }
       res.send({

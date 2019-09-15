@@ -2,7 +2,7 @@ const sid = require('@startergate/sidjs');
 
 const note = require('models').note;
 const metadata = require('models').metadata;
-const sharedmetadata = require('models').sharedmetadata;
+const sharedMetadata = require('models').sharedmetadata;
 
 exports.sidAuthMiddleware = (req, res, next) => {
     sid.loginAuth(req.headers.sid_clientid, req.headers.sid_sessid).then(info => {
@@ -18,7 +18,7 @@ exports.sidAuthMiddleware = (req, res, next) => {
         }
         note.tableName = `notedb_${info.pid}`;
         metadata.tableName = `metadb_${info.pid}`;
-        sharedmetadata.tableName = `sharedb_${info.pid}`;
+        sharedMetadata.tableName = `sharedb_${info.pid}`;
         next();
     }).catch(err => {
         console.error(err);
@@ -116,7 +116,7 @@ exports.findCategory = (req, res, next) => {
 exports.findSharedNote = (req, res, next) => {
     let currentNoteDBName = note.tableName;
     let output = [];
-    sharedmetadata.findAll().then(async smd => {
+    sharedMetadata.findAll().then(async smd => {
       for (let data in smd) {
         let noteData = data.shareTable.split('_');
         note.tableName = `notedb_${noteData[0]}`;

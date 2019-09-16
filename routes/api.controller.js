@@ -114,26 +114,35 @@ exports.findCategory = (req, res, next) => {
 };
 
 exports.findSharedNote = (req, res, next) => {
-    let currentNoteDBName = note.tableName;
-    let output = [];
-    sharedMetadata.findAll().then(async smd => {
-      for (let data in smd) {
-        let noteData = data.shareTable.split('_');
-        note.tableName = `notedb_${noteData[0]}`;
-        if (note.tableName === currentNoteDBName) continue;
-        await note.findByPk(noteData[1], { attributes: ['name'] }).then(note => {
-          return new Promise(_ => {
-            output.push({ shareID: data.shareID, isEditable: !!+data.shareEdit, name: note.name });
-          }, err => console.error(err));
-        }).catch(err => {
-          // return new Promise()
-        })
-      }
-      res.send({
-        type: "data",
+  let currentNoteDBName = note.tableName;
+  let output = [];
 
-        is_valid: true,
-        data: output
-      });
-    })
+  sharedMetadata.findAll().then(smd => {
+    let procedureCounter = 0;
+    smd.forEach(async data => {
+      procedureCounter++;
+      console.log("foreaching");
+      console.log(data);
+      let noteData = data.shareTable.split('_');
+      note.tableName = `notedb_${noteData[0]}`;
+      if (note.tableName !== currentNoteDBName) {
+        await note.findByPk(noteData[1], {attributes: ['name']}).then(note => {
+          output.push({shareID: data.shareID, isEditable: !!+data.shareEdit, name: note.name});
+          console.log(output);
+        }).catch(err => {
+          console.error(err);
+        });
+      }
+      if (procedureCounter === smd.length) {
+        res.send({
+          type: "data",
+
+          is_valid: true,
+          data: output
+        });
+      }
+    });
+
+    console.log("foreach out");
+  });
 };

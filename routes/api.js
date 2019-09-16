@@ -15,9 +15,7 @@ router.get('/category/:id', controller.findCategorizedNote);
 
 router.get('/note', controller.findAllNote);
 
-router.post('/note', (req, res, next) => {
-    res.render('index', { title: 'Express' });
-});
+router.post('/note', controller.createNote);
 
 router.get('/note/shared', controller.findSharedNote);
 

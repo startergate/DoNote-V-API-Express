@@ -1,8 +1,11 @@
 const sid = require('@startergate/sidjs');
+const md5 = require('md5');
 
 const note = require('models').note;
 const metadata = require('models').metadata;
 const sharedMetadata = require('models').sharedmetadata;
+
+const universals = require('modules/universalModules');
 
 exports.sidAuthMiddleware = (req, res, next) => {
     sid.loginAuth(req.headers.sid_clientid, req.headers.sid_sessid).then(info => {
@@ -69,7 +72,7 @@ exports.updateNote = (req, res, next) => {
     }).catch(err => {
         console.error(err);
         res.sendStatus(500);
-    })
+    });
 };
 
 exports.createNote = (req, res, next) => {
@@ -88,6 +91,21 @@ exports.createNote = (req, res, next) => {
       is_created: false
     });
   }
+  createQuery.id = md5(req.body.name + universals.randomString(10));
+  note.create(createQuery).then(result => {
+    res.send({
+      type: 'data',
+
+      is_valid: true,
+      is_succeed: true,
+      is_created: true
+    });
+  }).catch(err => {
+    console.error(err);
+    res.sendStatus(500);
+  });
+};
+
 exports.findAllNote = (req, res, next) => {
     note.findAll({ attributes: ['name', 'id', 'category'] }).then(notes => {
         res.send({

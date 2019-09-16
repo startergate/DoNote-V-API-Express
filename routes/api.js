@@ -19,9 +19,7 @@ router.post('/note', (req, res, next) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/note/shared', (req, res, next) => {
-    res.render('index', { title: 'Express' });
-});
+router.get('/note/shared', controller.findSharedNote);
 
 router.get('/note/:id', controller.findNote);
 

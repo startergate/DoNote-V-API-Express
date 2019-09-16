@@ -22,10 +22,12 @@ exports.SharedMetaData = (sequelize, DataTypes) => {
   return sequelize.define("SharedMetaData", {
     shareTable: {
       type: DataTypes.STRING(65),
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     shareID: {
       type: DataTypes.STRING(32),
+      primaryKey: true,
       allowNull: false,
       unique: 'compositeIndex'
     },

@@ -72,6 +72,22 @@ exports.updateNote = (req, res, next) => {
     })
 };
 
+exports.createNote = (req, res, next) => {
+  let createQuery;
+  if (req.body.name || req.body.text) createQuery = {
+    name: req.body.name,
+    text: req.body.text,
+    edittime: new Date(Date.now()).toISOString().replace('T', ' ').split('Z').join('')
+  };
+  else {
+    res.send({
+      type: 'error',
+
+      is_valid: true,
+      is_succeed: false,
+      is_created: false
+    });
+  }
 exports.findAllNote = (req, res, next) => {
     note.findAll({ attributes: ['name', 'id', 'category'] }).then(notes => {
         res.send({

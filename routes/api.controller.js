@@ -52,7 +52,7 @@ exports.updateNote = (req, res, next) => {
             type: 'error',
 
             is_valid: true,
-            is_succeed: true,
+            is_succeed: false,
             is_modified: false
         });
     }
@@ -121,8 +121,6 @@ exports.findSharedNote = (req, res, next) => {
     let procedureCounter = 0;
     smd.forEach(async data => {
       procedureCounter++;
-      console.log("foreaching");
-      console.log(data);
       let noteData = data.shareTable.split('_');
       note.tableName = `notedb_${noteData[0]}`;
       if (note.tableName !== currentNoteDBName) {

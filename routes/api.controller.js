@@ -25,7 +25,7 @@ exports.sidAuthMiddleware = (req, res, next) => {
         next();
     }).catch(err => {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(400);
     });
 };
 
@@ -115,21 +115,23 @@ exports.findAllNote = (req, res, next) => {
             data: notes
         });
     }).catch(err => {
+        console.error(err);
         res.sendStatus(202);
     });
 };
 
 exports.findCategorizedNote = (req, res, next) => {
-    note.findAll({ where: { category: req.params.id }, attributes: ['name', 'id', 'category'] }).then(notes => {
-        res.send({
-            type: 'data',
+  note.findAll({ where: { category: req.params.id }, attributes: ['name', 'id', 'category'] }).then(notes => {
+    res.send({
+      type: 'data',
 
-            is_valid: true,
-            data: notes
-        });
-    }).catch(err => {
-        res.sendStatus(202);
+      is_valid: true,
+      data: notes
     });
+  }).catch(err => {
+    console.error(err)
+    res.sendStatus(202);
+  });
 };
 
 exports.findCategory = (req, res, next) => {

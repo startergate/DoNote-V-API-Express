@@ -135,17 +135,26 @@ exports.findCategorizedNote = (req, res, next) => {
 };
 
 exports.findCategory = (req, res, next) => {
-    metadata.findAll({ where: { datatype: "CATEGORY" }, attributes: [ 'metadata', 'metaid' ] })
-      .then(categories => {
-          res.send({
-              type: 'data',
+  metadata.findAll({ where: { datatype: "CATEGORY" }, attributes: [ 'metadata', 'metaid' ] })
+    .then(categories => {
+      res.send({
+        type: 'data',
 
-              is_valid: true,
-              data: categories
-          });
-      }).catch(err => {
-          console.error(err);
-          res.sendStatus(520);
+        is_valid: true,
+        data: categories
+      });
+    }).catch(err => {
+      console.error(err);
+      res.statusCode = 520;
+      res.send({
+      type: 'data',
+
+      is_valid: true,
+      is_succeed: false
+    });
+    });
+};
+
     });
 };
 

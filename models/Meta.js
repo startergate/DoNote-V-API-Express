@@ -25,7 +25,8 @@ exports.MetaData = (sequelize, DataTypes) => {
     },
     metaid: {
       type: DataTypes.CHAR(32),
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     timestamps: false

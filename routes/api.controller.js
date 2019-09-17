@@ -155,7 +155,25 @@ exports.findCategory = (req, res, next) => {
     });
 };
 
+exports.createCategory = (req, res, next) => {
+  metadata.create({datatype: "CATEGORY", metadata: req.body.name, metaid: md5(req.body.name + universals.randomString(10))}).then(user => {
+    res.send({
+      type: 'data',
+
+      is_valid: true,
+      is_succeed: true,
+      is_created: true
     });
+  }).catch(err => {
+    console.error(err);
+    res.statusCode = 500;
+    res.send({
+      type: 'data',
+
+      is_valid: true,
+      is_succeed: false
+    });
+  });
 };
 
 exports.findSharedNote = (req, res, next) => {
@@ -185,7 +203,5 @@ exports.findSharedNote = (req, res, next) => {
         });
       }
     });
-
-    console.log("foreach out");
   });
 };

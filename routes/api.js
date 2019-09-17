@@ -6,10 +6,8 @@ router.use(controller.sidAuthMiddleware);
 
 router.get('/category', controller.findCategory);
 
-router.post('/category', (req, res, next) => {
-    // TODO: notedb category하고 metadb metaid 자료형 맞추기
-    res.render('index', { title: 'Express' });
-});
+// TODO: notedb category하고 metadb metaid 자료형 맞추기
+router.post('/category', controller.createCategory);
 
 router.get('/category/:id', controller.findCategorizedNote);
 
